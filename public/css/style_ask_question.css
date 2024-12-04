@@ -1,0 +1,40 @@
+main#ask_question {
+    margin: 3% 0% 0% 0%;
+}
+
+main#ask_question h2{
+    color: #2286DB;
+    font-weight: bold;
+    margin-bottom: 1%;    
+    text-align: center;
+}
+
+main#ask_question div#description {
+    margin-top: 0;
+    color:rgb(170, 170, 170);     
+    text-align: center;
+}
+
+main#ask_question form > div{
+    margin: 1em auto;
+    width: 60%;
+}
+
+
+main#ask_question #buttons{
+    margin-top: 2em;
+    text-align: center;
+}
+
+main#ask_question #submit {  
+    margin-right: .5em;
+    margin-left: auto;
+    padding: 12px 20px;
+} 
+
+main#ask_question #cancel {  
+    padding: 12px 20px;
+    margin-left: .5em;
+    margin-right: auto;
+
+}

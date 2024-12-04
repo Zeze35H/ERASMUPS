@@ -1,0 +1,265 @@
+main#mods_dashboard{
+    margin: 3% 15% 0% 15%;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+/*
+main#mods_dashboard #head{
+    text-align: center;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+}*/
+main#mods_dashboard div#search{
+    text-align: center;
+
+}
+main#mods_dashboard .btn-outline-success{
+	color: #2aa493;
+	border-color: #2aa493;
+}
+
+main#mods_dashboard .btn-outline-success:hover{
+	transition-delay: 10ms;
+	color: #fff;
+	background-color: #207e71;
+}
+
+
+main#mods_dashboard h2{
+    color: #2286DB;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+main#mods_dashboard div#description {
+    margin-top: 0;
+    color:rgb(170, 170, 170);  
+}
+
+main#mods_dashboard div#body.container{
+    position: absolute;
+}
+main#mods_dashboard .user-list tbody td > img {
+    position: relative;
+	max-width: 50px;
+    float: left;
+	margin-right: 15px;
+}
+main#mods_dashboard .user-list tbody td .user-link {
+	display: block;
+	font-size: 1.25em;
+	padding-top: 3px;
+	margin-left: 60px;
+}
+main#mods_dashboard .user-list tbody td .user-subhead {
+	font-size: 0.875em;
+	font-style: italic;
+}
+
+/* TABLES */
+main#mods_dashboard .table {
+    border-collapse: separate;
+    margin-top: 0%;
+}
+main#mods_dashboard .table-hover > tbody > tr:hover > td,
+main#mods_dashboard .table-hover > tbody > tr:hover > th {
+    background-color: #fff;
+    font-weight: bold;
+
+    
+}
+main#mods_dashboard .table thead > tr > th {
+	border-bottom: 1px solid #C2C2C2;
+    padding-bottom: 0;
+    font-weight: bold;
+}
+main#mods_dashboard .table tbody > tr > td {
+	font-size: 0.875em;
+	background: #f5f5f5;
+	border-top: 10px solid #fff;
+	vertical-align: middle;
+	padding: 12px 8px;
+}
+main#mods_dashboard .table tbody > tr > td:first-child,
+main#mods_dashboard .table thead > tr > th:first-child {
+	padding-left: 20px;
+}
+main#mods_dashboard .table thead > tr > th span {
+	border-bottom: 2px solid #C2C2C2;
+	display: inline-block;
+	padding: 0 5px;
+	padding-bottom: 5px;
+	font-weight: normal;
+}
+main#mods_dashboard .table thead > tr > th > a span {
+	color: #344644;
+}
+main#mods_dashboard .table thead > tr > th > a span:after {
+	content: "\f0dc";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	margin-left: 5px;
+	font-size: 0.75em;
+}
+main#mods_dashboard .table thead > tr > th > a.asc span:after {
+	content: "\f0dd";
+}
+main#mods_dashboard .table thead > tr > th > a.desc span:after {
+	content: "\f0de";
+}
+main#mods_dashboard .table thead > tr > th > a:hover span {
+	text-decoration: none;
+	color: #2bb6a3;
+	border-color: #2bb6a3;
+}
+main#mods_dashboard .table.table-hover tbody > tr > td {
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+}
+main#mods_dashboard .table tbody tr td .call-type {
+	display: block;
+	font-size: 0.75em;
+	text-align: center;
+}
+main#mods_dashboard .table tbody tr td .first-line {
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 1.125em;
+}
+main#mods_dashboard .table tbody tr td .first-line span {
+	font-size: 0.875em;
+	color: #969696;
+	font-weight: 300;
+}
+main#mods_dashboard .table tbody tr td .second-line {
+	font-size: 0.875em;
+	line-height: 1.2;
+}
+main#mods_dashboard .table a.table-link {
+	margin: 0 5px;
+	font-size: 1.125em;
+}
+main#mods_dashboard .table a.table-link.success:hover {
+	color: #207e71;
+}
+main#mods_dashboard .table a.table-link.danger {
+	color: #fe635f;
+}
+main#mods_dashboard .table a.table-link.success {
+	color: #2aa493;
+}
+main#mods_dashboard .table a.table-link.danger:hover {
+	color: #dd504c;
+}
+
+
+main#mods_dashboard .table-products tbody > tr > td {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #ebebeb;
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+	position: relative;
+}
+main#mods_dashboard .table-products tbody > tr:hover > td {
+	text-decoration: none;
+	background-color: #f6f6f6;
+}
+main#mods_dashboard .table-products .name {
+	display: block;
+	font-weight: 600;
+	padding-bottom: 7px;
+}
+main#mods_dashboard .table-products .price {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+main#mods_dashboard .table-products .price > i {
+	color: #8dc859;
+}
+main#mods_dashboard .table-products .warranty {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+main#mods_dashboard .table-products .warranty > i {
+	color: #f1c40f;
+}
+main#mods_dashboard .table tbody > tr.table-line-fb > td {
+	background-color: #9daccb;
+	color: #262525;
+}
+main#mods_dashboard .table tbody > tr.table-line-twitter > td {
+	background-color: #9fccff;
+	color: #262525;
+}
+main#mods_dashboard .table tbody > tr.table-line-plus > td {
+	background-color: #eea59c;
+	color: #262525;
+}
+main#mods_dashboard .table-stats .status-social-icon {
+	font-size: 1.9em;
+	vertical-align: bottom;
+}
+
+div.empty_message {
+    color: #ffffff;
+    background-color: #C2C2C2;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    align-content: center;
+    padding:15px;
+    width: 300px;
+    align-content: center;
+    margin: auto;
+  	border: 3px solid;
+	text-align: center;
+
+
+}
+
+@media screen and (max-width: 1199px) {
+	table tbody tr td:last-child {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	button.ban, button.demote {
+		background-color: #fe635f;
+		border-color: #fe635f;
+		padding: 1px 5px;
+		margin: 0;
+	}
+	
+	button.ban{
+		margin-bottom: 10%;
+	}
+	
+}
+
+@media screen and (max-width: 800px) {
+
+	
+	main#mods_dashboard{
+		width: 100%;
+		margin: 3% 0% 0% 0%;
+	}
+
+	main#mods_dashboard .container, main#mods_dashboard .container .row, main#mods_dashboard .container .row .col-lg-12{
+		padding: 0;
+	}
+
+	
+}

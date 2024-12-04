@@ -1,0 +1,359 @@
+html {
+	scroll-behavior:smooth;
+}
+
+ @keyframes example {
+    0%   {background-color: none;}
+    25%   {background-color: rgba(228, 228, 228, 0.500);}
+    50%  {background-color: rgba(228, 228, 228, 0.500);}
+    75%  {background-color: rgba(228, 228, 228, 0.500);}
+    100% {background-color: none;}
+  }
+
+:target {
+    animation-name: example;
+    animation-duration: 3s;
+} 
+
+a {
+    text-decoration: unset;
+    color: black;
+}
+
+.error {
+    font-style: italic;
+    color: red;
+}
+
+.success {
+    background-color: #2aa493;
+    padding: 1em;
+    border-radius: 10px;
+    font-style: italic;
+    color: white;
+    margin-top: 1em;
+}
+
+.success .close_button {
+    text-align: end;
+    color: rgba(228, 228, 228);
+}
+
+.success .close_button i:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.failure {
+    background-color: #e6534e;
+    padding: 1em;
+    border-radius: 10px;
+    font-style: italic;
+    color: white;
+}
+
+.failure .close_button {
+    text-align: end;
+    color: rgba(228, 228, 228);
+}
+
+.failure .close_button i:hover {
+    cursor: pointer;
+    color: white;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    position: relative;
+    padding-bottom: 40px;
+    min-height: 100vh;
+}
+
+header nav{
+    display: flex;
+    background-color:rgba(228, 228, 228, 0.500);
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 3;
+}
+
+main {
+    margin-top: 5em !important;
+}
+
+header nav #navbarSupportedContent {
+    font-weight: bold;
+}
+
+header nav #navbarDropdown .dropdown-menu {
+    z-index: 3;
+}
+
+/* BUTTONS */
+
+
+
+header nav #log_out_button:hover {
+    color: #c0322d
+}
+
+.btn.btn-outline-success {
+    background-color:  #fff;
+    border-style: solid;
+    border-color: #2aa493;
+    color: #2aa493;
+}
+
+.btn.btn-outline-success:hover {
+    animation-delay: 10ms;
+    background-color:  #207e71;
+    border-color: #207e71;
+    color: #fff
+}
+
+.btn-red {
+    background-color:#fff;
+    border-color: #fe635f;
+    color:#fe635f;
+}
+
+.btn-red:hover {
+    animation-delay: 10ms;
+    border-color: #dd504c;
+    background-color:  #dd504c;
+    color: #fff
+}
+
+.btn-green {
+    background-color:  #fff;
+    border-style: solid;
+    border-color: #2aa493;
+    color: #2aa493;
+}
+
+.btn-green:hover {
+    animation-delay: 10ms;
+    background-color:  #207e71;
+    border-color: #207e71;
+    color: #fff
+}
+
+.btn-blue {
+    background-color: #2286DB;
+    border-style: solid;
+    border-color: rgb(0, 98, 211);
+    color: #ffffff;
+}
+
+.btn-outline-primary {
+    border-color: #2286DB;
+    background: transparent;
+    color: #2286DB;
+}
+
+.btn-outline-primary:hover {
+    animation-delay: 10ms;
+    border-color: #2286DB;
+    background: #2286DB;
+    color: #fff;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.remove button {
+    background-color: transparent;
+    border-style: none;
+    border-color: transparent;
+    color: black;
+    padding: 0mm;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0mm;
+}
+
+.remove button:hover {
+    background-color: transparent;
+    color: red;
+    cursor: pointer;
+}
+
+button {
+    background-color: #2286DB;
+    border-style: solid;
+    border-color: rgb(0, 98, 170);
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px 32px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+button:hover{  
+    animation-delay: 10ms;
+    
+    border-color: rgb(123, 140, 160);
+} 
+
+button.accept {
+    background-color: #2aa493;
+	border-color: #2aa493;
+    padding: 1px 5px;
+    margin-right: 10%;
+}
+
+button.refuse, button.ban, button.trash, button.ignore, button.demote {
+    background-color: #fe635f;
+	border-color: #fe635f;
+    padding: 1px 5px;
+}
+
+button.ban, button.trash {
+    margin-right: 10%;
+}
+
+button.ignore {
+    margin-right: 0;
+}
+
+.button_small{
+    font-size: 10px;
+    background-color: #5393c4;
+    border-style: solid;
+    border-color: #006ec5;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: small;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-top: -15px;
+}
+
+.button_small:hover {
+    animation-delay: 10ms;
+    background-color: #006ec5;
+    color: #fff;
+}
+
+.button_small_red{
+    font-size: 10px;
+    background-color: #fe635f;
+    border-color: #dd504c;
+    border-style: solid;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: small;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-top: -15px;
+}
+
+.button_small_red:hover {
+    animation-delay: 10ms;
+    background-color: #dd504c;
+    border-color: #dd504c;
+    color: #fff;
+}
+
+/* LINKS */
+
+main a {
+    text-decoration: underline;
+}
+
+footer.main-footer {
+    font-size: smaller;
+    font-weight: 600;
+
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 2rem;
+
+    padding-top: 0.5rem;
+    margin-top: 1em; 
+
+    background-color:rgba(228, 228, 228, 0.500);
+}
+
+/* NOTIFICATIONS */
+
+#notification_bell {
+    position:fixed;
+    right:10px;
+    top:80px;
+    z-index: 2;
+   
+}
+
+#notification_bell > button{
+    background-color: #2286DB;
+    z-index: 2;
+}
+
+#notifications {
+    width: 300px;
+    max-height: 500px;
+    margin-top: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow:auto;
+}
+
+#notifications .notification{
+    margin-bottom: 10px;
+}
+
+#notifications button{
+    width: 20%;
+    margin: 10px 40% 10px 40%;
+}
+
+@media screen and (max-width: 991px) {
+
+	#notification_bell {
+        position:fixed;
+        right:80px;
+        top:14px;
+        z-index: 4;
+    }
+	
+	
+}
+
+@media screen and (max-width: 350px) {
+
+    header nav .navbar-brand img{
+        width: 70%;
+        height: auto;
+    }
+
+    #notification_bell {
+        position:fixed;
+        right:10px;
+        top:14px; 
+    }
+	
+}

@@ -1,0 +1,158 @@
+main#user_profile div#user_profile_auxdiv{
+    justify-content: center;
+    margin: 0;
+}
+
+main#user_profile{
+    margin: 3% 10% 0% 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+main#user_profile div#user_profile_info {
+    text-align:center;
+}
+
+
+main#user_profile div#user_profile_info h2{
+    color: #2286DB;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+main#user_profile div#user_profile_info h3{
+    text-align: center;
+    margin: 0;
+}
+
+main#user_profile div#user_profile_info .subtitle{
+    color: rgb(80, 80, 80);
+    font-size:18px;
+    text-align: center;
+    margin: 0;
+}
+
+main#user_profile div#user_profile_info p{
+    color: rgb(170, 170, 170);
+    font-size: x-small;
+}
+
+
+main#user_profile div#user_profile_info .input:focus {
+    border: 2px solid #555;
+}
+
+
+
+main#user_profile div#user_profile_info p{
+    margin: 0;
+    text-align:center;
+}
+
+
+main#user_profile div#user_profile_info .avatar {
+    text-align:center;
+
+}
+
+main#user_profile div#user_profile_info .avatar img{
+    border-radius: 50%;
+}
+
+main#user_profile  div#user_profile_info .trust_level{
+    color: #2aa493;
+    font-weight: bolder;
+    font-size:18px;
+
+}
+
+main#q_a .icon:before {
+    box-sizing: border-box;
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  body{
+    margin-top:20px;
+    color: #1a202c;
+    text-align: left;
+}
+.main-body {
+    padding: 15px;
+}
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.h-100 {
+    height: 100%!important;
+}
+.shadow-none {
+    box-shadow: none!important;
+}
+.progress-bar {
+    background-color: #2286DB;
+}
+
+.material-icons {
+    color: #2286DB;
+}
+
+main#user_profile .bootstrap-tagsinput{
+    width: 100%;
+    
+}
+main#user_profile .label{
+    background-color: #ffedd4;
+    border-style: solid;
+    border-color: #ffa726;
+    color: #7b7065;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: small;
+    font-weight: 500;
+    margin-right: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    padding-top: 5px;
+    margin-bottom: 0.3rem!important;
+
+}
+
+

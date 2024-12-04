@@ -1,0 +1,35 @@
+main#sign_up > div {
+    margin-top: 5%;
+}
+
+main#sign_up div h2{
+    color: #2286DB;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+main#sign_up footer {
+    margin: auto;
+    margin-top: 2%;
+}
+
+main#sign_up .notes p{
+    color: rgb(0, 80, 172);
+    font-size: x-small;       
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 1%;
+}
+div.radio_buttons label.radio_input:first-child {
+    margin-right: 2%;
+}
+
+.btn {
+    text-align: center;
+}
+
+main#sign_up #submit {
+    margin-top: 1.1em;  
+    font-size: 1em;
+}

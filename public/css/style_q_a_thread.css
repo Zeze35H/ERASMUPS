@@ -1,0 +1,365 @@
+.row{
+    margin: 1em;
+}
+
+main#q_a_thread .answer.row {
+    margin-bottom: 1.8em;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.user:hover .notdeleteduser {
+    cursor: pointer;
+    color: #2286DB;
+}
+
+.user:hover .deleteduser {
+    cursor: auto;
+    color: none;
+}
+
+.star .cannotelect.elected {
+    display: initial;
+    font-size: 125%;
+    color: rgb(245, 208, 0);
+}
+
+.star .cannotelect {
+    display: none;
+    font-size: 125%;
+    color: rgb(220, 220, 220);
+}
+
+.star .canelect {
+    font-size: 125%;
+    color: rgb(100, 100, 100);
+}
+
+.star .canelect:hover {
+    color: rgb(245, 208, 0);
+    cursor: pointer;
+}
+
+.star .elected {
+    color: rgb(245, 208, 0);
+}
+
+.star .elected:hover {
+    color: none;
+    cursor:pointer;
+}
+
+.score .fa-chevron-up.votedUp {
+    color: rgb(32, 189, 32);
+}
+
+.score .fa-chevron-up.votedUp:hover {
+    color: none;
+    cursor:pointer;
+}
+
+.score .fa-chevron-down.votedDown {
+    color: red;
+}
+
+.score .fa-chevron-down.votedDown:hover {
+    color: none;
+    cursor:pointer;
+}
+
+section.answers {
+    margin-top: 50px;
+}
+
+div.close_message {
+    color: #ffffff;
+    background-color: #2aa493;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius:.5em;
+    border: 1px solid;
+    align-content: center;
+    padding:15px;
+    width: 300px;
+    align-content: center;
+    margin: auto;
+  border: 3px solid;
+
+
+}
+
+.question .question_images .imagePopUpWindow img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.question_opt, .answer_opt, .comment_opt {
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+}
+
+.question_opt > div, .answer_opt > div, .comment_opt > div {
+    text-align: center;
+    margin: 0.5em;
+}
+
+.score, .question_opt div.signs, .answer_opt div.signs, .comment_opt div.signs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.question_body {
+    border-style: solid;
+    border-color: #2286DB;
+    border-width: 2px;
+}
+
+.post_comment, .post_answer {
+    padding: 0;
+    display: flex; 
+    flex-direction: column;
+} 
+
+.post_comment textarea, .post_answer textarea {
+    width: 100%;
+    resize: none;
+}
+
+.post_comment .button_small, .post_answer .button_small {
+    margin-top: .85em;
+    margin-bottom: .85em;
+}
+
+
+.post_answer button {
+    align-self: center;
+}
+
+.post_comment button {
+    align-self: flex-end;
+}  
+
+.cannotvote, .cannotreport, .cannotremove {
+    color: rgb(220, 220, 220);
+}
+
+.canvote:hover {
+    cursor: pointer;
+    color: #2286DB;
+}
+
+.edit {
+
+    color: rgb(167, 167, 167);
+}
+
+.canedit:hover {
+    cursor: pointer;
+    color: rgb(88, 88, 88);
+}
+
+.cannotedit , .cannotreport, .cannotremove{
+    display: none;
+}
+
+/* Edit */
+
+div.date i.fa.fa-check {
+    margin-left: 0.2em;
+    margin-right: 1.1em;
+}
+
+div.date i.fa.fa-check:hover {
+    cursor: pointer;
+    color: rgb(0, 148, 25);
+}
+
+div.date i.fa.fa-times:hover {
+    cursor: pointer;
+    color: rgb(192, 0, 0);
+}
+
+div.edit div:last-child {
+    display: flex;
+    justify-content: center;
+}
+
+div.edit div:last-child button:last-child{
+    margin-left: 1em;
+}
+
+/* ------------
+    REPORTS
+    */
+ 
+.canreport:hover, .canremove:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.reported {
+    color: red;
+}
+
+.reported:hover {
+    cursor: auto;
+    color: none;
+}
+
+.modal-content {
+    border: 0;
+}
+
+.modal-header {
+    color: white;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+a.close_report_window i{
+    color: rgb(220, 220, 220);
+    cursor: pointer;
+}
+
+a.close_report_window i:hover {
+    color: white;
+}
+
+.modal-body div {
+    padding-left: 1em;
+    text-align: start;
+}
+
+.modal-body div input {
+    display: inline;
+    width: auto;
+}
+
+.modal-body div:last-child label {
+    display: inline;
+}
+
+.modal-body div:last-child input[type="text"] {
+    margin-left: 1em;
+}
+
+.modal-footer {
+    justify-content: center;
+}
+
+#report_done_window .modal-header {
+    background-color: white;
+    border-color: white;
+
+    justify-content: flex-end;
+}
+
+#report_done_window .modal-header a i {
+    color: #6c757d;
+}
+
+#report_done_window .modal-header a i:hover {
+    color: black;
+}
+
+#report_done_window .modal-body {
+    text-align: center;
+}
+
+#report_done_window .modal-body p {
+    margin: 0;
+} 
+
+.imagePopUpWindow .modal-content {
+    background-color: transparent;
+}
+
+.imagePopUpWindow .modal-content img {
+    margin-top: 1.5em;
+}
+
+/* --------------------------------------------- */
+
+div.edit div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+div.edit div label {
+    margin-right: 1em;
+}
+
+/* --------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+
+    section.comments .comment {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        grid-template-rows: auto;
+    }
+
+    section.comments .comment .comment_opt {
+        grid-area: 1/1/2/2;
+    }
+
+    section.comments .comment .comment_body {
+        grid-area: 1/2/2/3;
+    }
+
+    .question_opt, .answer_opt{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .question_body h1{
+        font-size: 175%
+    }
+
+    .input_row {
+        width: 100%;
+        margin: 0;
+    }
+
+    .input_row .post_comment {
+        width: 90%;
+        margin: 5% 5%;
+    }
+
+    .input_row .post_comment .input{
+        border-style: ridge;
+    }
+
+    main#q_a_thread .col-md-4.comment_opt span{
+        font-size: .8em;
+    }
+
+    main#q_a_thread .col-md-4.comment_opt{
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    main#q_a_thread .col-md-6.card.comment_body .date p {
+        font-size: .8em;
+        margin-bottom: 0;
+    }
+
+    main#q_a_thread .col-md-6.card.comment_body .card-body {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+    main#q_a_thread .answer.row .date {
+        font-size: .8em;
+    }
+
+    main#q_a_thread .view_images{
+        background-color: grey;
+        }
+
+}

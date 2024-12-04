@@ -1,0 +1,552 @@
+^ **Relation reference**  ^ **Relation name**  ^ **Order of magnitude**  ^ **Estimated growth**  ^
+| R01                     | user                        | thousands             | units per day         |
+| R02                     | mod                         | tens                  | units per day         |
+| R03                     | admin                       | tens                  | units per day         |
+| R04                     | content                     | tens of thousands     | dozens per day        |
+| R05                     | question                    | thousands             | units per day         |
+| R06                     | answer                      | thousands             | units per day         |
+| R07                     | comment                     | thousands             | units per day         |
+| R08                     | tag                         | hundreds              | units per day         |
+| R09                     | followedtags                | thousands             | units per day         |
+| R10                     | taggedquestion              | thousands             | units per day         |
+| R11                     | image                       | thousands             | units per day         |
+| R12                     | userimage                   | thousands             | units per day         |
+| R13                     | questionimage               | thousands             | units per day         |
+| R14                     | badge                       | tens                  | units per day         |
+| R15                     | modapplication              | hundreds              | units per day         | 
+| R16                     | notification                | tens thousands        | dozens per day        |    
+| R17                     | badgenotification           | hundreds              | units per day         |
+| R18                     | commentnotification         | thousands             | units per day         |
+| R19                     | answernotification          | thousands             | units per day         |
+| R20                     | tagnotification             | thousands             | units per day         |
+| R21                     | favouriteanswernotification | thousands             | units per day         |
+| R22                     | modapplicationnotification  | hundreds              | units per day         |
+| R23                     | reportnotification          | hundreds              | units per day         |
+| R24                     | report                      | hundreds              | units per day         |
+| R25                     | vote                        | thousands             | dozens per day        |
+| R26                     | earnedbadge                 | hundreds              | units per day         |
+
+
+=======================================================================================================================================================
+MOST FREQUENT QUERIES:
+=======================================================================================================================================================
+
+- SELECT01 - get notifications (para o user)
+- SELECT02 - get questions (tags)
+- SELECT03 - get questions by tag (quando se da search) (tags)
+- SELECT04 - get question (user, votes, imgs, date, tags)
+- SELECT05 - get answers (user, votes, date)
+- SELECT06 - get comments (user, votes, date)
+- SELECT07 - get all reports (not resolved)
+- SELECT08 - get all reports by user
+- SELECT09 - get all mod applications (not resolved)
+- SELECT10 - get all mod applications by user (not resolved)
+- SELECT11 - get all mods
+- SELECT12 - get mod by user
+- SELECT13 - get my profile info (lookup followedtags, questions, earnedbadge)
+- SELECT14 - get edit my profile info  ?
+- SELECT15 - get other profile info
+
+
+^ Query reference   | SELECT01         |
+^ Query description | Get notifications   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT text, timestamp 
+  FROM notification
+  WHERE user.id = $user_id; </code>
+  ORDER BY timestamp DESC ||
+
+
+^ Query reference   | SELECT02         |
+^ Query description | Get questions   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT question.title, content.text, tag.text
+  FROM content, question, taggedquestion, tag
+  WHERE content.id = question.id and question.id = taggedquestion.question_id and tag.id=taggedquestion.tag_id; </code>
+  ORDER BY question.timestamp DESC, question.score DESC ||
+
+
+^ Query reference   | SELECT03         |
+^ Query description | Get questions by tag   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT question.title, content.text, tag.text
+  FROM content, question, taggedquestion, tag
+  WHERE content.id = question.id and question.id = taggedquestion.question_id and tag.id=taggedquestion.tag_id and tag.id=$tag_id; </code>||
+
+^ Query reference   | SELECT04         |
+^ Query description | Get Q&A question   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path, content.score,
+ question.title, content.text, questionimage.path, content.timestamp, tag.text
+  FROM content, question, taggedquestion, tag, user, questionimage, userimage
+  WHERE content.user_id = user.id
+ and user.profile_picture_id = userimage.id
+ and content.id = question.id 
+ and question.id = taggedquestion.question_id 
+ and tag.id=taggedquestion.tag_id 
+ and question.id=questionimage.question_id; </code>||
+
+
+^ Query reference   | SELECT05         |
+^ Query description | Get Q&A's answers   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path, content.score,
+ answer.selected, content.text, content.timestamp
+  FROM content, question, answer, user, userimage
+  WHERE content.user_id = user.id
+ and user.profile_picture_id = userimage.id
+ and content.id = answer.id 
+ and question.id = answer.question_id 
+ ORDER BY
+  CASE
+    WHEN answer.selected THEN 1
+    ELSE 2
+  END,
+  content.score DESC,
+  content.timestamp ASC </code>||
+
+^ Query reference   | SELECT06         |
+^ Query description | Get answer's comments   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path, content.score,
+ content.text, content.timestamp
+  FROM content, question, answer, comment, user, userimage
+  WHERE content.user_id = user.id
+ and user.profile_picture_id = userimage.id
+ and content.id = answer.id 
+ and question.id = answer.question_id 
+ and answer.id = comment.answer_id 
+ ORDER BY content.timestamp ASC </code>||
+
+^ Query reference   | SELECT07         |
+^ Query description | Get pending reports   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path, user.trust_level,
+ report.timestamp, report.status, report.content_id, report.reason
+  FROM report, user
+  WHERE report.user_id = user.id and report.status="pending" </code>
+  ORDER BY report.timestamp DESC||
+
+^ Query reference   | SELECT08         |
+^ Query description | Get all user's reports   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path, user.trust_level,
+ report.timestamp, report.status, report.content_id, report.reason
+  FROM report, user
+  WHERE report.user_id = $user_id and report.user_id = user.id
+  ORDER BY 
+    CASE report.status
+      WHEN 'pending' THEN 1
+      ELSE 2
+    END,
+    report.timestamp DESC </code>||
+
+^ Query reference   | SELECT09         |
+^ Query description | Get all mod applications   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path,
+ user.trust_level, user.country
+  FROM modapplication, user
+  WHERE modapplication.user_id = user.id and modapplication.status="pending"
+  ORDER BY user.trus_level DESC, modapplication.timestamp DESC </code> ||
+
+^ Query reference   | SELECT10         |
+^ Query description | Search for user's mod application   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path,
+ user.trust_level, user.country
+  FROM modapplication, user
+  WHERE user.username = $username and modapplication.user_id = user.id and modapplication.status="pending" </code> ||
+
+^ Query reference   | SELECT11         |
+^ Query description | Get all mods   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path,
+ user.trust_level, mod.num_interactions
+  FROM user, mod
+  WHERE mod.id = user.id
+  ORDER BY mod.num_interactions DESC </code> ||
+
+^ Query reference   | SELECT12         |
+^ Query description | Search for a mod   |
+^ Query frequency   | hundreds per day |
+|<code sql> SELECT user.username, userimage.path,
+ user.trust_level, mod.num_interactions
+  FROM user, mod
+  WHERE user.username = $username and mod.id = user.id </code> ||
+
+
+^ Query reference   | SELECT13         |
+^ Query description | Get my profile info   |
+^ Query frequency   | hundreds per day |
+|<code sql> 
+SELECT * INTO #tempUser FROM user
+ALTER TABLE #tempUser DROP COLUMN password
+
+SELECT #tempUser.*, tag.text, badge.type, badge.level, 
+question.title, content.text, tag.text
+FROM #tempUser, followedtags, tag, badge, earnedbadge, 
+content, question, taggedquestion, tag
+WHERE #tempUser.id = $authenticated 
+and followedtags.user_id = #tempUser.id and followedtags.tag_id = tag.id 
+and earnedbadge.user_id = #tempUser.id and earnedbadge.badge_id = badge.id
+and content.id = question.id and content.user_id = #tempUser.id
+and question.id = taggedquestion.question_id and tag.id=taggedquestion.tag_id
+
+DROP TABLE #tempUser </code> ||
+
+
+
+^ Query reference   | SELECT14         |
+^ Query description | Get edit my profile info   |
+^ Query frequency   | hundreds per day |
+|<code sql> 
+SELECT * INTO #tempUser FROM user
+ALTER TABLE #tempUser DROP COLUMN password, num_votes, num_answers,
+num_fav_answers, num_questions, num_comments, num_visits 
+
+SELECT #tempUser.*
+FROM #tempUser
+WHERE #tempUser.id = $authenticated 
+
+DROP TABLE #tempUser </code> ||
+
+
+^ Query reference   | SELECT15         |
+^ Query description | Get other profile info   |
+^ Query frequency   | hundreds per day |
+|<code sql> 
+SELECT * INTO #tempUser FROM user
+ALTER TABLE #tempUser DROP COLUMN password, num_votes, num_answers,
+num_fav_answers, num_questions, num_comments, num_visits 
+
+SELECT #tempUser.*, badge.type, badge.level, 
+question.title, content.text, tag.text
+FROM #tempUser, tag, badge, earnedbadge, 
+content, question, taggedquestion, tag
+WHERE #tempUser.id = $user_id 
+and earnedbadge.user_id = #tempUser.id and earnedbadge.badge_id = badge.id
+and content.id = question.id and content.user_id = #tempUser.id
+and question.id = taggedquestion.question_id and tag.id=taggedquestion.tag_id
+
+DROP TABLE #tempUser </code> ||
+
+
+=======================================================================================================================================================
+MOST FREQUENT MODIFICATIONS:
+=======================================================================================================================================================
+
+
+- - UPDATES
+- UPDATE01 - update user profile image
+- UPDATE02 - update username
+- UPDATE03 - update email
+- UPDATE04 - update password
+- UPDATE05 - update bio
+- UPDATE06 - update birthday
+- UPDATE07 - update country
+- UPDATE08 - update report status
+- UPDATE09 - update mod appeal status
+
+- - INSERTS
+- INSERT01 - register user in website
+- INSERT02 - add question
+- INSERT03 - add answer
+- INSERT04 - add comment
+- INSERT06 - follow tag
+- INSERT06 - follow tag
+- INSERT07 - add report
+- INSERT08 - add mod appeal
+- INSERT09 - promote mod
+
+
+
+^ Query reference   | INSERT01             |
+^ Query description | New user registered  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "User" ("id", "username", "email", "name", "password", "country", "erasmus_in_out", "profile_picture_id", "birthday")
+VALUES ($username, $email, $name, $password, $erasmus_in_out, $country, $birthday); </code>||
+
+^ Query reference   | INSERT02             |
+^ Query description | New question  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Content" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "Question" ("id", "title") VALUES ($id, $title);
+ </code>||
+
+^ Query reference   | INSERT03             |
+^ Query description | New answer  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Content" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "Answer" ("id", "selected", "question_id") VALUES ($id, $selected, $question_id);
+ </code>||
+
+^ Query reference   | INSERT04             |
+^ Query description | New comment  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Content" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "Comment" ("id", "answer_id") VALUES ($id, $answer_id);
+ </code>||
+
+^ Query reference   | INSERT05             |
+^ Query description | New Tag  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Tag" ("id", "text") VALUES ($id, $text);
+ </code>||
+
+^ Query reference   | INSERT06             |
+^ Query description | Follow Tag  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "FollowedTags" ("tag_id", "user_id") VALUES ($tag_id, $user_id);
+ </code>||
+
+^ Query reference   | INSERT07             |
+^ Query description | Add Report  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Report" ("id", "user_id", "content_id", "mod_id", "reason") 
+VALUES ($id, $user_id, $content_id, null, $reason');
+ </code>||
+
+^ Query reference   | INSERT08             |
+^ Query description | Add Modd Appeal  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "ModApplication" ("id", "user_id") 
+VALUES ($id, $user_id);
+ </code>||
+
+
+^ Query reference   | INSERT09             |
+^ Query description | Add mod  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Mod" ("id") VALUES ($user_id);
+ </code>||
+
+^ Query reference   | INSERT10             |
+^ Query description | Add badge notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "BadgeNotification" ("id", "badge_id") VALUES ($id $badge_id);
+ </code>||
+
+^ Query reference   | INSERT11             |
+^ Query description | Add comment notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "CommentNotification" ("id", "comment_id") VALUES ($id, $comment_id);
+ </code>||
+
+^ Query reference   | INSERT12             |
+^ Query description | Add answer notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "AnswerNotification" ("id", "answer_id") VALUES ($id, $answer_id);
+ </code>||
+
+^ Query reference   | INSERT13             |
+^ Query description | Add favourite answer notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "FavouriteAnswerNotification" ("id", "answer_id") VALUES ($id, $answer_id);
+ </code>||
+
+  ^ Query reference   | INSERT14             |
+^ Query description | Add tag notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "TagNotification" ("id", "tag_id") VALUES ($id, $tag_id);
+ </code>||
+
+  ^ Query reference   | INSERT15             |
+^ Query description | Add report notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "ReportNotification" ("id", "report_id") VALUES ($id, $report_id);
+ </code>||
+
+  ^ Query reference   | INSERT16             |
+^ Query description | Add report notification  |
+^ Query frequency   | hundreds per month   |
+|<code sql> 
+INSERT INTO "Notification" ("id", "text", "user_id") VALUES ($id, $text, $user_id);
+INSERT INTO "ModNotification" ("id") VALUES ($id);
+ </code>||
+
+
+- - DELETES
+- DELETE01 - delete user
+- DELETE02 - delete content
+- DELETE03 - remove followed tag
+- DELETE04 - demote mod
+- DELETE05 - clear notifications
+
+^ Query reference   | DELETE01             |
+^ Query description | Delete user  |
+^ Query frequency   | tens per day   |
+|<code sql> 
+DELETE FROM "User"
+WHERE "id" = $user_id</code>||
+
+^ Query reference   | DELETE02             |
+^ Query description | Delete Content  |
+^ Query frequency   | tens per day   |
+|<code sql> 
+DELETE FROM "Content"
+WHERE "id" = $content_id</code>||
+
+^ Query reference   | DELETE03             |
+^ Query description | Delete Followed Tag  |
+^ Query frequency   | hundreds per day   |
+|<code sql> 
+DELETE FROM "FollowedTags"
+WHERE "tag_id" = $tag_id</code>||
+
+^ Query reference   | DELETE04             |
+^ Query description | Demote Mod |
+^ Query frequency   | tens per day   |
+|<code sql> 
+DELETE FROM "Mod"
+WHERE "id" = $mod_id</code>||
+
+^ Query reference   | DELETE05             |
+^ Query description | Demote Mod |
+^ Query frequency   | hundreds per day   |
+|<code sql> 
+DELETE FROM "Notification"
+WHERE "user_id" = $user_id</code>||
+
+=======================================================================================================================================================
+TRIGGERS:
+=======================================================================================================================================================
+A maior parte dos triggers ja estao no create.sql
+
+
+- TRIGGER12 - when add report notification, add notification
+
+CREATE FUNCTION report_notification_trigger() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+
+    IF NEW."status" = 'ignore_report' THEN  
+      --
+      -- Notification Table
+      WITH "not" AS(
+        INSERT INTO "Notification"("text", "user_id")
+        VALUES ('We decided to ignore your report!', NEW."user_id")
+        RETURNING "id"
+        )
+        
+        -- Report Notification Table
+        INSERT INTO "ReportNotification"("id", "report_id")
+        VALUES ((SELECT "id" FROM "not"), NEW."id");
+    ELSIF NEW."status" = 'delete_content' THEN
+      	--
+      -- Notification Table
+      WITH "not" AS(
+      	INSERT INTO "Notification"("text", "user_id")
+        VALUES ('Based in one report we decide to delete your content!', (SELECT "user_id" FROM "Content" WHERE "id" = NEW."content_id"))
+        RETURNING "id"
+      )
+      
+      -- Report Notification Table
+      INSERT INTO "ReportNotification"("id", "report_id")
+      VALUES ((SELECT "id" FROM "not"), NEW."id");
+    END IF;
+
+  RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER report_notification_trigger
+AFTER UPDATE ON "Report"
+FOR EACH ROW
+EXECUTE PROCEDURE report_notification_trigger();
+
+CREATE PROCEDURE treat_report(id1 integer, decision1 text, mod1 integer)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+
+  IF decision1 = 'pending' THEN
+		RAISE EXCEPTION 'Cannot put report pending.';
+	END IF;
+
+  IF (SELECT "status" FROM "Report" WHERE "id" = id1) <> 'pending' THEN
+      RAISE EXCEPTION 'This report was already processed.';
+  END IF;
+
+  IF mod1 IS NULL THEN
+    RAISE EXCEPTION 'Needed to specify which mod treated this report.';
+  END IF;
+  
+  UPDATE "Mod"
+  SET "num_interactions" = "num_interactions" + 1
+  WHERE "id" = mod1;
+  
+  IF decision1 = 'delete_content' OR decision1 = 'ban_author' THEN
+    UPDATE "Report"
+    SET "status" = decision1 AND "mod_id" = mod1
+    WHERE "status" = 'pending AND "content_id" = (SELECT "content_id" FROM "Report" WHERE "id" = id1); 
+  
+    IF decision1 = 'delete_content' THEN
+      UPDATE "User"
+      SET "num_reports" = "num_reports" + 1
+      WHERE "id" = (SELECT "user_id" FROM "Content" WHERE "id" = (SELECT "content_id" FROM "Report" WHERE "id" = id1));
+	  
+      UPDATE "Content"
+      SET "visible" = false,
+      WHERE "id" = (SELECT "content_id" FROM "Report" WHERE "id" = id1);
+    ELSIF 
+      id1 := (SELECT "user_id" FROM "Content" WHERE "id" = (SELECT "content_id" FROM "Report" WHERE "id" = id1));
+    
+      -- deletes a user from the database
+      UPDATE "User"
+      SET "username" = 'deleted' || id1,
+          "email" = 'deleted' || id1,
+          "name" = 'deleted' || id1,
+          "password" = 'deleted' || id1,
+          "trust_level" = 0,
+          "country" = 'deleted' || id1,
+          "bio" = NULL,
+          "erasmus_in_out" = NULL,
+          "profile_picture_id" = NULL,
+          "birthday" = '1990-01-01',
+          "num_votes" = 0,
+          "num_questions" = 0,
+          "num_comments" = 0,
+          "num_reports" = 0,
+          "num_answers" = 0,
+          "num_fav_answers" = 0,
+          "deleted" = true
+      WHERE "id" = id1;
+
+    END IF;
+  ELSIF decision1 = 'ignore_report' THEN
+    UPDATE "Report"
+    SET "status" = decision1 AND "mod_id" = mod1
+    WHERE "id" = id1; 
+  END IF;
+END
+$BODY$;
+
+=======================================================================================================================================================
+TRANSACTIONS:
+=======================================================================================================================================================
+
+No ficheiro create.sql
+

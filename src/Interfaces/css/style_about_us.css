@@ -1,0 +1,36 @@
+main#about_us img#cities_image {
+    height: 100%;
+    display: block;
+    margin-top: 40px;
+    margin: 20px auto;
+}
+
+main#about_us h2{
+    color: #2286DB;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
+main#about_us div#description {
+    margin: auto;
+    width: 40%;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+}
+
+main#about_us div#description img{
+    height: 28px;
+}
+main#about_us button {
+    display: block;
+    margin: 0 auto;
+}
+
+/* if mobile device max width 800px */
+@media only screen and (max-device-width: 800px) {
+    main#about_us img#cities_image{height: unset;}
+    main#about_us div#description{width: 80%;}
+    main#about_us h2{width: 90%; margin: 0 5%;}      
+} 
